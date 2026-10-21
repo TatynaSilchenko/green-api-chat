@@ -8,27 +8,18 @@ export interface Chat {
 }
 
 interface ChatState {
-  chats: Chat[]
-  activeChatId: string | null
-  addChat: (chat: Chat) => void
-  openChat: (id: string) => void
+  chat: Chat | null
+  setChat: (chat: Chat) => void
 }
 
 export const useChatStore = create<ChatState>()(
   persist(
     (set) => ({
-      chats: [],
-      activeChatId: null,
-      addChat: (chat) =>
-        set((state) =>
-          state.chats.some((item) => item.id === chat.id)
-            ? state
-            : { chats: [...state.chats, chat] },
-        ),
-      openChat: (id) => set({ activeChatId: id }),
+      chat: null,
+      setChat: (chat) => set({ chat }),
     }),
     {
-      name: `green-api-chat:${messenger.id}:chats`,
+      name: `green-api-chat:${messenger.id}:chat`,
       storage: createJSONStorage(() => sessionStorage),
     },
   ),

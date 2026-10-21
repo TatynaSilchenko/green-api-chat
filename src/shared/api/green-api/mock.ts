@@ -1,4 +1,10 @@
-import type { Notification, NotificationBody } from './types'
+import type { Credentials, Notification, NotificationBody } from './types'
+
+export const MOCK_CREDENTIALS: Credentials = {
+  idInstance: '1101000001',
+  apiTokenInstance: 'mock-token',
+}
+export const MOCK_PHONE = '+7 999 123-45-67'
 
 const queue: Notification[] = []
 const waiters = new Set<() => void>()

@@ -12,7 +12,7 @@ concurrency:
 
 env:
   VITE_MESSENGER: ${{ vars.VITE_MESSENGER || 'telegram' }}
-  VITE_DEFAULT_API_URL: ${{ vars.VITE_DEFAULT_API_URL || 'https://api.green-api.com' }}
+  VITE_API_URL: ${{ vars.VITE_API_URL || 'https://api.green-api.com' }}
 
 jobs:
   check:

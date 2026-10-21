@@ -5,7 +5,7 @@ import { messenger } from '@/shared/config'
 
 interface SessionState {
   credentials: Credentials | null
-  setCredentials: (credentials: Credentials) => void
+  setCredentials: (credentials: Credentials | null) => void
 }
 
 export const useSessionStore = create<SessionState>()(

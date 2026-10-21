@@ -1,3 +1,27 @@
+:root {
+  --color-bg: #f0f2f5;
+  --color-surface: #ffffff;
+  --color-border: #e4e6eb;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #707579;
+  --color-accent: #5b5bf7;
+  --color-accent-hover: #4a4ae0;
+  --color-accent-soft: #eeeefe;
+  --color-on-accent: #ffffff;
+  --color-danger: #e53935;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-bubble: 16px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --font-size-sm: 13px;
+  --font-size-md: 15px;
+  --font-size-lg: 17px;
+}
+
 *,
 *::before,
 *::after {
@@ -18,7 +42,53 @@ body {
     'Segoe UI',
     Roboto,
     sans-serif;
-  font-size: 15px;
-  color: #1a1a1a;
-  background: #f0f2f5;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  background: var(--color-surface);
+  border-color: var(--color-accent);
+}
+
+button {
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }

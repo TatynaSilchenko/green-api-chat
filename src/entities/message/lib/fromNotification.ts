@@ -4,7 +4,6 @@ import type { Message } from '../model/types'
 const directions: Partial<Record<string, Message['direction']>> = {
   incomingMessageReceived: 'in',
   outgoingAPIMessageReceived: 'out',
-  outgoingMessageReceived: 'out',
 }
 
 export function fromNotification(body: NotificationBody): Message | null {

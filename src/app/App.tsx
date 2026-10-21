@@ -1,9 +1,9 @@
-import { IS_API_MOCK, messenger } from '@/shared/config'
+import { useChatStore } from '@/entities/chat'
+import { ChatPage } from '@/pages/chat'
+import { StartPage } from '@/pages/start'
 
 export function App() {
-  return (
-    <p>
-      {messenger.name} chat — {IS_API_MOCK ? 'mock API' : 'GREEN-API'}
-    </p>
-  )
+  const hasChat = useChatStore((state) => state.chat !== null)
+
+  return hasChat ? <ChatPage /> : <StartPage />
 }

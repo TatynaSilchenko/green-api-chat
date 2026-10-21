@@ -1,3 +1,4 @@
+import { API_URL } from '@/shared/config'
 import type { CheckAccountResponse, Credentials, Notification, SendMessageResponse } from './types'
 
 export class GreenApiError extends Error {
@@ -10,8 +11,8 @@ export class GreenApiError extends Error {
   }
 }
 
-function buildUrl({ apiUrl, idInstance, apiTokenInstance }: Credentials, method: string) {
-  return `${apiUrl.replace(/\/+$/, '')}/waInstance${idInstance}/${method}/${apiTokenInstance}`
+function buildUrl({ idInstance, apiTokenInstance }: Credentials, method: string) {
+  return `${API_URL}/waInstance${idInstance}/${method}/${apiTokenInstance}`
 }
 
 function isFailure(data: unknown): data is { status: false; reason: string } {
