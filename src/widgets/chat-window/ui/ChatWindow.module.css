@@ -24,7 +24,16 @@
 }
 
 .messages {
+  display: flex;
   flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
   overflow-y: auto;
   padding: var(--space-4);
+}
+
+.empty {
+  margin: auto;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
 }

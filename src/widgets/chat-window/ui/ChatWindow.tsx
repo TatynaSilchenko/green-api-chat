@@ -1,9 +1,19 @@
+import { useEffect, useRef } from 'react'
 import { useChatStore } from '@/entities/chat'
+import { MessageBubble, useMessageStore } from '@/entities/message'
+import { MessageInput } from '@/features/send-message'
 import { IS_API_MOCK } from '@/shared/config'
 import styles from './ChatWindow.module.css'
 
 export function ChatWindow() {
   const chat = useChatStore((state) => state.chat)
+  const messages = useMessageStore((state) => (chat ? state.byChat[chat.id] : undefined))
+  const listRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const list = listRef.current
+    if (list) list.scrollTop = list.scrollHeight
+  }, [messages])
 
   if (!chat) return null
 
@@ -13,7 +23,14 @@ export function ChatWindow() {
         +{chat.phone}
         {IS_API_MOCK && <span className={styles.badge}>mock</span>}
       </header>
-      <div className={styles.messages} role="log" aria-live="polite" />
+      <div ref={listRef} className={styles.messages} role="log" aria-live="polite">
+        {messages?.length ? (
+          messages.map((message) => <MessageBubble key={message.id} message={message} />)
+        ) : (
+          <p className={styles.empty}>Сообщений пока нет</p>
+        )}
+      </div>
+      <MessageInput />
     </main>
   )
 }
