@@ -1,10 +1,4 @@
-import type {
-  CheckAccountResponse,
-  Credentials,
-  Notification,
-  SendMessageResponse,
-  StateInstanceResponse,
-} from './types'
+import type { CheckAccountResponse, Credentials, Notification, SendMessageResponse } from './types'
 
 export class GreenApiError extends Error {
   status: number
@@ -53,10 +47,6 @@ function postJson(body: unknown): RequestInit {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   }
-}
-
-export function getStateInstance(credentials: Credentials) {
-  return request<StateInstanceResponse>(buildUrl(credentials, 'getStateInstance'))
 }
 
 export function checkAccount(credentials: Credentials, phoneNumber: number) {

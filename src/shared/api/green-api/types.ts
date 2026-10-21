@@ -4,10 +4,6 @@ export interface Credentials {
   apiTokenInstance: string
 }
 
-export interface StateInstanceResponse {
-  stateInstance: string
-}
-
 export interface CheckAccountResponse {
   exist: boolean
   chatId: string

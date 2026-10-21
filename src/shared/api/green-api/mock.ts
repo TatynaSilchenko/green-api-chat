@@ -60,9 +60,6 @@ function readBody(init?: RequestInit): Record<string, unknown> {
 
 async function handle(method: string, extra: string | undefined, init?: RequestInit) {
   switch (method) {
-    case 'getStateInstance':
-      return json({ stateInstance: 'authorized' })
-
     case 'checkAccount':
       return json({ exist: true, chatId: String(readBody(init).phoneNumber) })
 
