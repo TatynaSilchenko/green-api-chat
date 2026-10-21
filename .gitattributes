@@ -1,0 +1,2 @@
+# Always LF in the repo and working tree (Prettier expects LF, CI runs on Linux)
+* text=auto eol=lf
