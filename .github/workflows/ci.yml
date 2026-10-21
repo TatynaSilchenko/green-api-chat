@@ -6,13 +6,11 @@ on:
   pull_request:
   workflow_dispatch:
 
-# Only one deploy at a time; a newer push cancels the queued one.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
-  # Repository variable (Settings → Secrets and variables → Actions → Variables), telegram by default
   VITE_MESSENGER: ${{ vars.VITE_MESSENGER || 'telegram' }}
   VITE_DEFAULT_API_URL: ${{ vars.VITE_DEFAULT_API_URL || 'https://api.green-api.com' }}
 

@@ -3,8 +3,7 @@ export type MessengerId = 'telegram' | 'max'
 export interface MessengerConfig {
   id: MessengerId
   name: string
-  /** Allowed country calling codes; null means any international number */
-  phoneCodes: readonly string[] | null
+  phoneCodes: string[] | null
   maxMessageLength: number
 }
 
@@ -13,16 +12,12 @@ const messengers: Record<MessengerId, MessengerConfig> = {
   max: { id: 'max', name: 'MAX', phoneCodes: ['7', '375'], maxMessageLength: 4000 },
 }
 
-function isMessengerId(value: string): value is MessengerId {
-  return Object.hasOwn(messengers, value)
-}
-
-export function resolveMessenger(value: string): MessengerConfig {
-  if (!isMessengerId(value)) {
+function resolveMessenger(value: string): MessengerConfig {
+  if (!Object.hasOwn(messengers, value)) {
     const allowed = Object.keys(messengers).join(', ')
     throw new Error(`VITE_MESSENGER="${value}" is not supported, use one of: ${allowed}`)
   }
-  return messengers[value]
+  return messengers[value as MessengerId]
 }
 
 export const messenger = resolveMessenger(import.meta.env.VITE_MESSENGER || 'telegram')
