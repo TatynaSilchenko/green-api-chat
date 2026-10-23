@@ -1,16 +1,14 @@
 import { useState, type FormEvent } from 'react'
 import { useChatStore } from '@/entities/chat'
 import { useSessionStore } from '@/entities/session'
-import { GreenApiError, MOCK_PHONE, checkAccount } from '@/shared/api'
-import { IS_API_MOCK, messenger } from '@/shared/config'
+import { GreenApiError, checkAccount } from '@/shared/api'
 import { normalizePhone } from '@/shared/lib'
 import styles from './CreateChatForm.module.css'
 
 function validatePhone(phone: string): string | null {
   if (phone.length < 10 || phone.length > 15) return 'Введите номер полностью, с кодом страны'
-  const codes = messenger.phoneCodes
-  if (codes && !codes.some((code) => phone.startsWith(code))) {
-    return `${messenger.name} принимает только номера ${codes.map((code) => `+${code}`).join(' и ')}`
+  if (!phone.startsWith('7') && !phone.startsWith('375')) {
+    return 'MAX принимает только номера +7 и +375'
   }
   return null
 }
@@ -37,7 +35,7 @@ export function CreateChatForm() {
     try {
       const { exist, chatId } = await checkAccount(credentials, Number(phone))
       if (!exist) {
-        setError(`Номер не найден в ${messenger.name}`)
+        setError('Номер не найден в MAX')
         return
       }
       setChat({ id: chatId, phone })
@@ -58,7 +56,6 @@ export function CreateChatForm() {
           inputMode="tel"
           autoComplete="off"
           placeholder="+7 999 123-45-67"
-          defaultValue={IS_API_MOCK ? MOCK_PHONE : undefined}
           required
           aria-describedby={error ? 'create-chat-error' : undefined}
         />

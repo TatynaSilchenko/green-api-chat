@@ -3,7 +3,6 @@ import { useChatStore } from '@/entities/chat'
 import { MessageBubble, useMessageStore } from '@/entities/message'
 import { useReceiveMessages } from '@/features/receive-messages'
 import { MessageInput } from '@/features/send-message'
-import { IS_API_MOCK } from '@/shared/config'
 import styles from './ChatWindow.module.css'
 
 export function ChatWindow() {
@@ -21,10 +20,7 @@ export function ChatWindow() {
 
   return (
     <main className={styles.window}>
-      <header className={styles.header}>
-        +{chat.phone}
-        {IS_API_MOCK && <span className={styles.badge}>mock</span>}
-      </header>
+      <header className={styles.header}>+{chat.phone}</header>
       {receiveError && (
         <p className={styles.error} role="alert">
           {receiveError}

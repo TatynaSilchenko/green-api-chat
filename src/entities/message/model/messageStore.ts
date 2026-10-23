@@ -1,6 +1,5 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { messenger } from '@/shared/config'
 import type { Message } from './types'
 
 interface MessageState {
@@ -20,7 +19,7 @@ export const useMessageStore = create<MessageState>()(
         }),
     }),
     {
-      name: `green-api-chat:${messenger.id}:messages`,
+      name: 'green-api-chat:messages',
       storage: createJSONStorage(() => sessionStorage),
     },
   ),

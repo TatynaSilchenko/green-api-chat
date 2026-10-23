@@ -1,11 +1,8 @@
 import { useSessionStore } from '@/entities/session'
-import { MOCK_CREDENTIALS } from '@/shared/api'
-import { IS_API_MOCK } from '@/shared/config'
 import styles from './CredentialsForm.module.css'
 
 export function CredentialsForm() {
-  const credentials =
-    useSessionStore((state) => state.credentials) ?? (IS_API_MOCK ? MOCK_CREDENTIALS : null)
+  const credentials = useSessionStore((state) => state.credentials)
   const setCredentials = useSessionStore((state) => state.setCredentials)
 
   return (

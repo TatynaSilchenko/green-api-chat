@@ -3,8 +3,9 @@ import { useChatStore } from '@/entities/chat'
 import { useMessageStore } from '@/entities/message'
 import { useSessionStore } from '@/entities/session'
 import { GreenApiError, sendMessage } from '@/shared/api'
-import { messenger } from '@/shared/config'
 import styles from './MessageInput.module.css'
+
+const MAX_MESSAGE_LENGTH = 4000
 
 export function MessageInput() {
   const credentials = useSessionStore((state) => state.credentials)
@@ -64,7 +65,7 @@ export function MessageInput() {
           placeholder="Сообщение"
           aria-label="Сообщение"
           rows={1}
-          maxLength={messenger.maxMessageLength}
+          maxLength={MAX_MESSAGE_LENGTH}
         />
         <button type="submit" disabled={pending || !text.trim()}>
           Отправить

@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import type { Credentials } from '@/shared/api'
-import { messenger } from '@/shared/config'
 
 interface SessionState {
   credentials: Credentials | null
@@ -15,7 +14,7 @@ export const useSessionStore = create<SessionState>()(
       setCredentials: (credentials) => set({ credentials }),
     }),
     {
-      name: `green-api-chat:${messenger.id}:session`,
+      name: 'green-api-chat:session',
       storage: createJSONStorage(() => sessionStorage),
     },
   ),
