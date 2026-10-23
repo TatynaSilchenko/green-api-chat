@@ -11,9 +11,12 @@ export function MessageBubble({ message }: MessageBubbleProps) {
   return (
     <div className={message.direction === 'out' ? `${styles.bubble} ${styles.out}` : styles.bubble}>
       <span className={styles.text}>{message.text}</span>
-      <time className={styles.time} dateTime={new Date(message.timestamp).toISOString()}>
-        {timeFormat.format(message.timestamp)}
-      </time>
+      <span className={styles.meta}>
+        {message.failed && <span className={styles.failed}>Не доставлено</span>}
+        <time dateTime={new Date(message.timestamp).toISOString()}>
+          {timeFormat.format(message.timestamp)}
+        </time>
+      </span>
     </div>
   )
 }

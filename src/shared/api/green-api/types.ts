@@ -15,6 +15,8 @@ export interface SendMessageResponse {
 export interface NotificationBody {
   typeWebhook: string
   idMessage?: string
+  chatId?: string
+  status?: string
   timestamp?: number
   senderData?: {
     chatId: string

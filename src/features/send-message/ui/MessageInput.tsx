@@ -62,12 +62,12 @@ export function MessageInput() {
               void send()
             }
           }}
-          placeholder="Сообщение"
+          placeholder="Сообщение…"
           aria-label="Сообщение"
           rows={1}
           maxLength={MAX_MESSAGE_LENGTH}
         />
-        <button type="submit" disabled={pending || !text.trim()}>
+        <button type="submit" className={styles.send} disabled={pending || !text.trim()}>
           Отправить
         </button>
       </div>

@@ -35,12 +35,18 @@ export function CreateChatForm() {
     try {
       const { exist, chatId } = await checkAccount(credentials, Number(phone))
       if (!exist) {
-        setError('Номер не найден в MAX')
+        setError(
+          'Номер не найден в MAX. Проверьте номер и настройку «Найти меня по номеру» у получателя',
+        )
         return
       }
       setChat({ id: chatId, phone })
     } catch (caught) {
-      setError(caught instanceof GreenApiError ? caught.message : 'Нет связи с GREEN-API')
+      setError(
+        caught instanceof GreenApiError
+          ? caught.message
+          : 'Нет связи с GREEN-API. Проверьте интернет и попробуйте ещё раз',
+      )
     } finally {
       setPending(false)
     }

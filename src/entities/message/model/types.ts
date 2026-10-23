@@ -4,4 +4,5 @@ export interface Message {
   text: string
   direction: 'in' | 'out'
   timestamp: number
+  failed?: boolean
 }

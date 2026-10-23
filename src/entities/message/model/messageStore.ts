@@ -5,6 +5,7 @@ import type { Message } from './types'
 interface MessageState {
   byChat: Record<string, Message[]>
   add: (message: Message) => void
+  markFailed: (chatId: string, id: string) => void
 }
 
 export const useMessageStore = create<MessageState>()(
@@ -16,6 +17,17 @@ export const useMessageStore = create<MessageState>()(
           const messages = state.byChat[message.chatId] ?? []
           if (messages.some((item) => item.id === message.id)) return state
           return { byChat: { ...state.byChat, [message.chatId]: [...messages, message] } }
+        }),
+      markFailed: (chatId, id) =>
+        set((state) => {
+          const messages = state.byChat[chatId]
+          if (!messages?.some((item) => item.id === id)) return state
+          return {
+            byChat: {
+              ...state.byChat,
+              [chatId]: messages.map((item) => (item.id === id ? { ...item, failed: true } : item)),
+            },
+          }
         }),
     }),
     {

@@ -34,9 +34,15 @@ async function pollNotifications(
     try {
       const notification = await receiveNotification(credentials, signal)
       if (notification) {
-        const message = fromNotification(notification.body)
+        const { body } = notification
+        const message = fromNotification(body)
         if (message && message.chatId === useChatStore.getState().chat?.id) {
           useMessageStore.getState().add(message)
+        }
+        if (body.typeWebhook === 'outgoingMessageStatus' && body.status === 'failed') {
+          if (body.chatId && body.idMessage) {
+            useMessageStore.getState().markFailed(body.chatId, body.idMessage)
+          }
         }
         await deleteNotification(credentials, notification.receiptId)
       }

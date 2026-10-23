@@ -1,16 +1,23 @@
 :root {
+  color-scheme: light;
   --color-bg: #f0f2f5;
   --color-surface: #ffffff;
   --color-border: #e4e6eb;
   --color-text: #1a1a1a;
   --color-text-secondary: #707579;
-  --color-accent: #5b5bf7;
-  --color-accent-hover: #4a4ae0;
+  --color-accent: #1f6fe0;
+  --color-accent-hover: #1a5fc2;
   --color-on-accent: #ffffff;
-  --color-danger: #e53935;
+  --color-bubble-in: #ffffff;
+  --color-bubble-out: #e1f0ff;
+  --color-time-out: #1a5fc2;
+  --color-chat-bg: linear-gradient(to top right, #9fd6dc, #74a9f7);
+  --color-chat-chip: rgb(0 0 0 / 35%);
+  --color-danger: #d32f2f;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-bubble: 16px;
+  --radius-pill: 24px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -19,6 +26,7 @@
   --font-size-sm: 13px;
   --font-size-md: 15px;
   --font-size-lg: 17px;
+  --chat-column: 680px;
 }
 
 *,
@@ -76,6 +84,7 @@ button {
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 button:hover:not(:disabled) {

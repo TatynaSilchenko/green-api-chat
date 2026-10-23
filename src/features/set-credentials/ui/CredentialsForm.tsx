@@ -1,7 +1,11 @@
 import { useSessionStore } from '@/entities/session'
 import styles from './CredentialsForm.module.css'
 
-export function CredentialsForm() {
+interface CredentialsFormProps {
+  onSave?: () => void
+}
+
+export function CredentialsForm({ onSave }: CredentialsFormProps) {
   const credentials = useSessionStore((state) => state.credentials)
   const setCredentials = useSessionStore((state) => state.setCredentials)
 
@@ -15,11 +19,19 @@ export function CredentialsForm() {
           idInstance: String(data.get('idInstance')).trim(),
           apiTokenInstance: String(data.get('apiTokenInstance')).trim(),
         })
+        onSave?.()
       }}
     >
       <label className={styles.field}>
         idInstance
-        <input name="idInstance" defaultValue={credentials?.idInstance} required />
+        <input
+          name="idInstance"
+          inputMode="numeric"
+          autoComplete="off"
+          spellCheck={false}
+          defaultValue={credentials?.idInstance}
+          required
+        />
       </label>
       <label className={styles.field}>
         apiTokenInstance
@@ -31,7 +43,7 @@ export function CredentialsForm() {
           required
         />
       </label>
-      <button type="submit">Продолжить</button>
+      <button type="submit">Сохранить данные</button>
     </form>
   )
 }
